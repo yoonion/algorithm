@@ -1,10 +1,12 @@
-N = int(input())
-num = []
+import sys
 
-for tc in range(N):
-    num.append(int(input()))
+N = int(sys.stdin.readline())
 
-num.sort()
+nums = []
+for _ in range(N):
+    nums.append(int(sys.stdin.readline()))
 
-for i in num:
+nums.sort() # 파이썬의 sort()는 Tim sort 알고리즘 - 평균 O(NlogN) 의 시간 복잡도 / 최선 O(n)
+
+for i in nums:
     print(i)
