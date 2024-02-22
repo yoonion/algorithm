@@ -14,7 +14,6 @@ for _ in range(T): # 테스트 케이스 수
     answer = "YES"
     for i in range(N - 1):
         # 인접한 문자열 포함 비교
-        # if phone_numbers[i] in phone_numbers[i + 1] or phone_numbers[i + 1] in phone_numbers[i]:
         if phone_numbers[i] == phone_numbers[i + 1][:len(phone_numbers[i])]:
             answer = "NO"
             break
