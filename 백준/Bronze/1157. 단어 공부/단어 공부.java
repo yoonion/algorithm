@@ -1,33 +1,34 @@
 import java.util.*;
 
-public class Main{
+class Main {
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
-        String inputString = sc.next();
-        String upperInputString = inputString.toUpperCase();
+        String s = sc.nextLine();
+        String lowerCase = s.toLowerCase();
 
-        int[] countArray = new int[26];
-
-        for (int i = 0; i < upperInputString.length(); i++) {
-            char c = upperInputString.charAt(i);
-            countArray[c - 65]++;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < lowerCase.length(); i++) {
+            map.put(lowerCase.charAt(i), map.getOrDefault(lowerCase.charAt(i), 0) + 1);
         }
 
-        int max = 0;
-        char result = '?';
-        for (int i = 0; i < countArray.length; i++) {
-            if (max < countArray[i]) {
-                max = countArray[i];
-                result = (char)(i + 65);
-            } else if (max == countArray[i]) {
-                result = '?';
+        List<Character> keys = new ArrayList<>(map.keySet());
+        keys.sort((o1, o2) -> map.get(o2).compareTo(map.get(o1)));
+
+        Integer maxValue = Integer.MIN_VALUE;
+        Character maxResult = null;
+        for (Character key : keys) {
+            Integer value = map.get(key);
+            if (value.equals(maxValue)) {
+                maxResult = '?';
+                break;
+            } else if (value > maxValue) {
+                maxValue = value;
+                maxResult = key;
             }
         }
 
-        System.out.println(result);
+        System.out.println(String.valueOf(maxResult).toUpperCase());
     }
-
 }
