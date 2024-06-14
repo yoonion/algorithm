@@ -1,20 +1,20 @@
 import java.util.*;
 
-public class Main {
+class Main {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
 
+        int N = Integer.parseInt(sc.next());
         for (int i = 0; i < N; i++) {
-            String answer = "YES";
             Stack<String> stack = new Stack<>();
-
-            String inputString = sc.next();
-            String[] strings = inputString.split("");
-            for (String string : strings) {
-                if (string.equals("(")) {
-                    stack.push(string);
-                } else {
+            String inputStr = sc.next();
+            String[] strs = inputStr.split("");
+            String answer = "YES";
+            for (String str : strs) {
+                if (str.equals("(")) {
+                    stack.push(str);
+                } else if (str.equals(")")) {
                     if (stack.isEmpty()) {
                         answer = "NO";
                         break;
@@ -29,6 +29,5 @@ public class Main {
 
             System.out.println(answer);
         }
-
     }
 }
