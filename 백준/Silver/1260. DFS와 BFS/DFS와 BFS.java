@@ -1,14 +1,11 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 class Main {
 
-    static int[][] graph;
-    static int[] visited;
+    static int graph[][];
+    static int visited[];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         int N = sc.nextInt();
         int M = sc.nextInt();
         int V = sc.nextInt();
@@ -22,41 +19,37 @@ class Main {
 
         visited = new int[N + 1];
         DFS(V);
+
         System.out.println();
 
         visited = new int[N + 1];
         BFS(V);
-        System.out.println();
     }
 
-    public static void DFS(int v) {
-        visited[v] = 1;
-        System.out.print(v + " ");
-
-        for(int j = 1; j < graph.length; j++) {
-            // 연결된 노드인데 방문하지 않은 경우
-            if(graph[v][j] == 1 && visited[j] == 0) {
-                // 연결된 노드 찾으면 재귀함수 호출
-                DFS(j);
+    public static void DFS(int V) {
+        visited[V] = 1;
+        System.out.print(V + " ");
+        for (int i = 1; i < graph[V].length; i++) {
+            if (graph[V][i] == 1 && visited[i] == 0) {
+                DFS(i);
             }
         }
     }
 
-    public static void BFS(int v) {
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(v);
-        visited[v] = 1; // 방문 체크
-        System.out.print(v + " ");
-        while (!q.isEmpty()) {
-            Integer next = q.poll();
-            for (int i = 1; i < graph[next].length; i++) {
-                if (graph[next][i] == 1 && visited[i] == 0) {
+    public static void BFS(int V) {
+        visited[V] = 1;
+        System.out.print(V + " ");
+        Deque<Integer> dq = new ArrayDeque<>();
+        dq.offer(V);
+        while (!dq.isEmpty()) {
+            int poll = dq.poll();
+            for (int i = 1; i < graph[poll].length; i++) {
+                if (graph[poll][i] == 1 && visited[i] == 0) {
+                    dq.offer(i);
                     visited[i] = 1;
                     System.out.print(i + " ");
-                    q.offer(i);
                 }
             }
         }
     }
-
 }
