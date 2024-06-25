@@ -5,4 +5,4 @@ select animal_id, name,
         else 'X'
     end as 중성화
 from animal_ins
-order by animal_id
+order by animal_id 
