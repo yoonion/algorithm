@@ -7,23 +7,19 @@ class Main {
 
         int zero_count = 0;
         int one_count = 0;
-        String beforeStr = "-1";
-        for (int i = 0; i < strs.length; i++) {
-            if (beforeStr.equals("-1")) {
-                if (strs[i].equals("0")) {
-                    zero_count++;
-                    beforeStr = "0";
-                } else {
+
+        if (strs[0].equals("0")) {
+            zero_count++;
+        } else {
+            one_count++;
+        }
+
+        for (int i = 1; i < strs.length; i++) {
+            if (!strs[i].equals(strs[i - 1])) {
+                if (strs[i].equals("1")) {
                     one_count++;
-                    beforeStr = "1";
-                }
-            } else if (!beforeStr.equals(strs[i])) {
-                if (strs[i].equals("0")) {
-                    zero_count++;
-                    beforeStr = "0";
                 } else {
-                    one_count++;
-                    beforeStr = "1";
+                    zero_count++;
                 }
             }
         }
