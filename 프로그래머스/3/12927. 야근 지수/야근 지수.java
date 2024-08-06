@@ -1,29 +1,30 @@
-import java.util.PriorityQueue;
-import java.util.Collections;
+import java.util.*;
 
 class Solution {
     public long solution(int n, int[] works) {
-        PriorityQueue<Integer> overtime = new PriorityQueue<>(Collections.reverseOrder());
-
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         for (int work : works) {
-            overtime.offer(work);
+            pq.offer(work);
         }
         
-        for (int i = 0; i < n; i++) {
-            int max = (int)overtime.poll();
-            if (max <= 0) break;
-            overtime.offer(max - 1);
+        long answer = 0;
+        while (n>0) {
+            int poll = pq.poll();
+            if (poll==0) {
+                return answer;
+            } else {
+                pq.offer(poll-1); // 가장 오래 걸리는 작업 -1 해주고, 우선순위 큐에 다시 넣어줌   
+            }
+             
+            n--;
         }
         
-        return sumPow(overtime);
-    }
-    
-    long sumPow(PriorityQueue<Integer> works) {
-        long sum = 0;
-        while (!works.isEmpty()) {
-            sum += Math.pow(works.poll(), 2);
+        // 총 야근 지수 구하기
+        while (!pq.isEmpty()) {
+            int poll = pq.poll();
+            answer += poll*poll;
         }
-        return sum;
+        
+        return answer;
     }
-    
 }
