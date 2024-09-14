@@ -1,3 +1,3 @@
 select flavor
-from first_half
+from FIRST_HALF
 order by total_order desc, SHIPMENT_ID
