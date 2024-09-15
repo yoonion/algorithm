@@ -2,15 +2,14 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
+        int limitSelectCount = nums.length / 2;
         Set<Integer> set = new HashSet<>();
-        int N = nums.length / 2;
-        
         for (int num : nums) {
             set.add(num);
         }
         
-        if (set.size() >= N) {
-            return N;
+        if (limitSelectCount <= set.size()) {
+            return limitSelectCount;
         }
         
         return set.size();
