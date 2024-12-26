@@ -2,16 +2,18 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
-        int limitSelectCount = nums.length / 2;
+        int limit = nums.length / 2;
+        
         Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            set.add(num);
+        for (int i=0; i<nums.length; i++) {
+            set.add(nums[i]);
         }
         
-        if (limitSelectCount <= set.size()) {
-            return limitSelectCount;
+        if (set.size() < limit) {
+            return set.size();
         }
         
-        return set.size();
+        return limit;
+        
     }
 }
